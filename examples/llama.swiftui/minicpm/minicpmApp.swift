@@ -12,7 +12,7 @@ struct minicpmApp: App {
     @StateObject var llamaState = LlamaState()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MacContentView()
                 .environmentObject(llamaState)
         }
         .defaultSize(width: 900, height: 600)

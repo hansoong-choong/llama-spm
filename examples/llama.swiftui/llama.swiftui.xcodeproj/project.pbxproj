@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		549479CB2AC9E16000E0F78B /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549479CA2AC9E16000E0F78B /* Metal.framework */; };
 		8A1C83772AC328BD0096AF73 /* llama_swiftuiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C83762AC328BD0096AF73 /* llama_swiftuiApp.swift */; };
-		8A1C83792AC328BD0096AF73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C83782AC328BD0096AF73 /* ContentView.swift */; };
+		8A1C83792AC328BD0096AF73 /* MobileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C83782AC328BD0096AF73 /* MobileContentView.swift */; };
 		8A1C837B2AC328BE0096AF73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A1C837A2AC328BE0096AF73 /* Assets.xcassets */; };
 		8A39BE0A2AC7601100BFEB40 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A39BE092AC7601000BFEB40 /* Accelerate.framework */; };
 		8A3F84242AC4C891005E2EE8 /* models in Resources */ = {isa = PBXBuildFile; fileRef = 8A3F84232AC4C891005E2EE8 /* models */; };
 		8A9F7C4D2AC332EE008AE1EA /* LlamaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9F7C4C2AC332EE008AE1EA /* LlamaState.swift */; };
 		B57B08662C7EBF02000B8846 /* llama in Frameworks */ = {isa = PBXBuildFile; productRef = B57B08652C7EBF02000B8846 /* llama */; };
 		B594691A2C6DFF9400EB00B3 /* minicpmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59469192C6DFF9400EB00B3 /* minicpmApp.swift */; };
-		B594691C2C6DFF9400EB00B3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B594691B2C6DFF9400EB00B3 /* ContentView.swift */; };
+		B594691C2C6DFF9400EB00B3 /* MacContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B594691B2C6DFF9400EB00B3 /* MacContentView.swift */; };
 		B594691E2C6DFF9500EB00B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B594691D2C6DFF9500EB00B3 /* Assets.xcassets */; };
 		B59469212C6DFF9500EB00B3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B59469202C6DFF9500EB00B3 /* Preview Assets.xcassets */; };
 		B59469272C6DFF9F00EB00B3 /* llama in Frameworks */ = {isa = PBXBuildFile; productRef = B59469262C6DFF9F00EB00B3 /* llama */; };
@@ -29,14 +29,14 @@
 		549479CA2AC9E16000E0F78B /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		8A1C83732AC328BD0096AF73 /* llama.swiftui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = llama.swiftui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A1C83762AC328BD0096AF73 /* llama_swiftuiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = llama_swiftuiApp.swift; sourceTree = "<group>"; };
-		8A1C83782AC328BD0096AF73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8A1C83782AC328BD0096AF73 /* MobileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileContentView.swift; sourceTree = "<group>"; };
 		8A1C837A2AC328BE0096AF73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A39BE092AC7601000BFEB40 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8A3F84232AC4C891005E2EE8 /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = models; path = llama.swiftui/Resources/models; sourceTree = "<group>"; };
 		8A9F7C4C2AC332EE008AE1EA /* LlamaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaState.swift; sourceTree = "<group>"; };
 		B59469172C6DFF9400EB00B3 /* minicpm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = minicpm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B59469192C6DFF9400EB00B3 /* minicpmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = minicpmApp.swift; sourceTree = "<group>"; };
-		B594691B2C6DFF9400EB00B3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B594691B2C6DFF9400EB00B3 /* MacContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacContentView.swift; sourceTree = "<group>"; };
 		B594691D2C6DFF9500EB00B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B59469202C6DFF9500EB00B3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B59469222C6DFF9500EB00B3 /* minicpm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = minicpm.entitlements; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 		8A9F7C4A2AC332BF008AE1EA /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				8A1C83782AC328BD0096AF73 /* ContentView.swift */,
+				8A1C83782AC328BD0096AF73 /* MobileContentView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -150,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				B59469192C6DFF9400EB00B3 /* minicpmApp.swift */,
-				B594691B2C6DFF9400EB00B3 /* ContentView.swift */,
+				B594691B2C6DFF9400EB00B3 /* MacContentView.swift */,
 				B594691D2C6DFF9500EB00B3 /* Assets.xcassets */,
 				B59469222C6DFF9500EB00B3 /* minicpm.entitlements */,
 				B594691F2C6DFF9500EB00B3 /* Preview Content */,
@@ -276,7 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A9F7C4D2AC332EE008AE1EA /* LlamaState.swift in Sources */,
-				8A1C83792AC328BD0096AF73 /* ContentView.swift in Sources */,
+				8A1C83792AC328BD0096AF73 /* MobileContentView.swift in Sources */,
 				8A1C83772AC328BD0096AF73 /* llama_swiftuiApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,7 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B594692D2C6DFFB500EB00B3 /* LlamaState.swift in Sources */,
-				B594691C2C6DFF9400EB00B3 /* ContentView.swift in Sources */,
+				B594691C2C6DFF9400EB00B3 /* MacContentView.swift in Sources */,
 				B594691A2C6DFF9400EB00B3 /* minicpmApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,7 +8,7 @@
 import PhotosUI
 import SwiftUI
 
-struct ContentView: View {
+struct MacContentView: View {
     
     @EnvironmentObject var llamaState : LlamaState
     @State private var pickerItem: PhotosPickerItem?
@@ -34,14 +34,16 @@ struct ContentView: View {
                             llamaState.message = ""
                             self.message = "loading prediction ..."
                             self.timer = Timer.publish (every: 0.5, on: .current, in: .common).autoconnect()
-                            Task {
-                                llamaState.appStatus = .BUSY
-                                await llamaState.runPrediction(imagePath: llamaState.fileURL!.path(), prompt : self.prompt)
-                                llamaState.appStatus = .READY
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                    self.timer.upstream.connect().cancel()
+                            //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                Task {
+                                    llamaState.appStatus = .BUSY
+                                    await llamaState.runPrediction(imagePath: llamaState.fileURL!.path(), prompt : self.prompt)
+                                    llamaState.appStatus = .READY
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                        self.timer.upstream.connect().cancel()
+                                    }
                                 }
-                            }
+                            //}
                         }
                     }
 //                Spacer()
@@ -53,16 +55,22 @@ struct ContentView: View {
 //                .pickerStyle(.radioGroup)
                 Spacer()
                 Button {
-                    Task {
-                        await llamaState.testTextEmbed(prompt: self.prompt)
-                        self.message = "\(llamaState.embeding)"
-                    }
+                    llamaState.message = ""
+                    self.message = "Test encoding ..."
+                    //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        Task {
+                            llamaState.appStatus = .BUSY
+                            await llamaState.testTextEmbed(prompt: self.prompt)
+                            self.message = "\(llamaState.embeding)"
+                            llamaState.appStatus = .READY
+                        }
+                    //}
                 } label: {
                     HStack {
                         Image(systemName: "t.circle")
                         Text("Text Embed")
                     }
-                }.disabled(llamaState.appStatus == .EMPTY)
+                }.disabled(llamaState.appStatus != .READY)
                 Button {
                         llamaState.downloadALL()
                 } label: {
@@ -115,9 +123,10 @@ struct ContentView: View {
                 if let imageData = try await pickerItem?.loadTransferable(type: ImageData.self) {
                     self.imageData = imageData
                     self.showProgress = true
+                    llamaState.message = ""
                     self.message = "loading prediction ..."
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         Task {
                             if let fileURL = llamaState.writetoDoc(data: imageData.data) {
                                 llamaState.fileURL = fileURL
@@ -130,7 +139,7 @@ struct ContentView: View {
                             }
                             self.showProgress = false
                         }
-                    }
+                    //}
                 }
                 
             }

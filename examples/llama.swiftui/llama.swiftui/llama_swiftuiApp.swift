@@ -5,7 +5,7 @@ struct llama_swiftuiApp: App {
     @StateObject var llamaState = LlamaState()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MobileContentView()
                 .environmentObject(llamaState)
         }
     }

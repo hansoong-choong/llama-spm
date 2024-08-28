@@ -57,7 +57,7 @@ class LlamaState: ObservableObject {
     var progressCLIP = 0.0
     var observationLLM: NSKeyValueObservation?
     var observationCLIP: NSKeyValueObservation?
-    let llmmodel = "ggml-model-Q5_K.gguf"
+    let llmmodel = "ggml-model-Q4_0.gguf"
     
     init() {
         updateStatus()
@@ -185,11 +185,28 @@ class LlamaState: ObservableObject {
     }
     
     func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
+        let fileManager = FileManager.default
+        return fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+    }
+    
+    func prepareModelFolder() {
+        
+        
+        let imagesPath = getDocumentsDirectory().appendingPathComponent("cpm")
+        do
+        {
+            try FileManager.default.createDirectory(atPath: imagesPath.path, withIntermediateDirectories: true, attributes: nil)
+        }
+        catch let error as NSError
+        {
+            NSLog("Unable to create directory \(error.debugDescription)")
+        }
     }
     
     func downloadALL() {
+        FileManager.default.clearTmpDirectory()
+        prepareModelFolder()
+        
         self.appStatus = .DOWNLOADING
         
         let urlsPath : [String] = ["https://huggingface.co/openbmb/MiniCPM-V-2_6-gguf/resolve/main/\(llmmodel)?download=true",
@@ -219,9 +236,12 @@ class LlamaState: ObservableObject {
             }
             
             do {
+                
                 if let temporaryURL = temporaryURL {
                     let fileURL = self.getLocalModelURLFor(type: type)
-                    try FileManager.default.copyItem(at: temporaryURL, to: fileURL)
+                    let _ = print("fileURL = \(fileURL)")
+                    try FileManager.default.moveItem(at: temporaryURL, to: fileURL)
+                    
                     print("Writing to \(fileURL) completed")
                     DispatchQueue.main.sync {
                         switch type {
@@ -284,6 +304,21 @@ struct ImageData: Transferable {
         #else
             throw TransferError.importFailed
         #endif
+        }
+    }
+}
+
+extension FileManager {
+    func clearTmpDirectory() {
+        do {
+            let tmpDirectory = try contentsOfDirectory(atPath: NSTemporaryDirectory())
+            let _ = print("temp = \(tmpDirectory)")
+            try tmpDirectory.forEach {[unowned self] file in
+                let path = String.init(format: "%@%@", NSTemporaryDirectory(), file)
+                try self.removeItem(atPath: path)
+            }
+        } catch {
+            print(error)
         }
     }
 }

@@ -1,7 +1,7 @@
 import SwiftUI
 import PhotosUI
 
-struct ContentView: View {
+struct MobileContentView: View {
     
     @EnvironmentObject var llamaState : LlamaState
     @State private var pickerItem: PhotosPickerItem?
@@ -18,9 +18,9 @@ struct ContentView: View {
             .disableAutocorrection(true)
         //.frame(width : 350)
             .onSubmit {
-                if let fileURL = llamaState.fileURL {
+                if let _ = llamaState.fileURL {
                     llamaState.message = ""
-                    self.message = ""
+                    self.message = "loading prediction ..."
                     self.timer = Timer.publish (every: 0.5, on: .current, in: .common).autoconnect()
                     Task {
                         llamaState.appStatus = .BUSY
@@ -37,6 +37,7 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 promptView
+                    .padding()
                 ZStack {
                     ZStack(alignment:.topLeading) {
                         if imageData != nil {
@@ -56,18 +57,38 @@ struct ContentView: View {
                     .lineSpacing(10)
                     .multilineTextAlignment(.leading)
                     .padding()
-                Text(llamaState.status)
-                    .font(.system(size: 16))
-                    .multilineTextAlignment(.leading)
-            }.toolbar {
-                Button {
-                    showPicker.toggle()
-                } label: {
-                    Text("Image")
+                HStack {
+                    Button {
+                        llamaState.message = ""
+                        self.message = "test encoding ..."
+                        Task {
+                            llamaState.appStatus = .BUSY
+                            await llamaState.testTextEmbed(prompt: self.prompt)
+                            self.message = "\(llamaState.embeding)"
+                            llamaState.appStatus = .READY
+                        }
+                    } label: {
+                        HStack {
+                            Image(systemName: "t.circle")
+                            Text("Text Embed")
+                        }
+                    }.disabled(llamaState.appStatus != .READY)
+                    Text(llamaState.status)
+                        .font(.system(size: 16))
+                        .multilineTextAlignment(.leading)
                 }
-                .photosPicker(isPresented: $showPicker, selection: $pickerItem)
-                .disabled(llamaState.appStatus != .READY)
-                //ToolbarItem(placement: .topBarTrailing) {
+            }
+            .disabled(llamaState.appStatus == .BUSY)
+            .toolbar {
+                HStack {
+                    Button {
+                        showPicker.toggle()
+                    } label: {
+                        Text("Image")
+                    }
+                    .photosPicker(isPresented: $showPicker, selection: $pickerItem)
+                    .disabled(llamaState.appStatus != .READY)
+                    
                     Button {
                         llamaState.downloadALL()
                     } label: {
@@ -76,8 +97,7 @@ struct ContentView: View {
                             Text("Download MiniCPMv 2.6")
                         }
                     }.disabled(llamaState.appStatus != .EMPTY)
-                //}
-               // }.disabled(llamaState.appStatus == .BUSY)
+                }.disabled(llamaState.appStatus == .BUSY)
             }
             
         }
@@ -114,9 +134,9 @@ struct ContentView: View {
             }
         }
         .onChange(of: llamaState.language) {
-            if let fileURL = llamaState.fileURL {
+            if let _ = llamaState.fileURL {
                 llamaState.message = ""
-                self.message = ""
+                self.message = "loading prediction ..."
                 self.timer = Timer.publish (every: 0.5, on: .current, in: .common).autoconnect()
                 Task {
                     llamaState.appStatus = .BUSY
